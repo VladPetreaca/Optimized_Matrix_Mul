@@ -55,10 +55,11 @@ double *matrix_multiplication(double *a, double *b, int N, int mul_case)
 				double *pb = &b[j]; 
 				register double sum = 0;
 
-				for (k = i; k < N; k++){
-					sum += *pa * *pb;
-					pa++;
-					pb += N;
+				for (k = 0; k < N; k++){
+					if (k >= i)
+                        sum += *pa * *pb;
+                    pa++;
+                    pb += N;
 				}
 
 				result[i * N + j] = sum;
@@ -73,8 +74,9 @@ double *matrix_multiplication(double *a, double *b, int N, int mul_case)
 				double *pb = &b[j]; 
 				register double sum = 0;
 
-				for (k = j; k < N; k++) {
-					sum += *pa * *pb;
+				for (k = 0; k < N; k++) {
+					if (k >= j)
+                        sum += *pa * *pb;
 					pa++;
 					pb += N;
 				}
@@ -102,8 +104,10 @@ double *trans(double *a, int N)
 	}
 
 	for (i = 0; i < N; i++) {
+		double *pa_line = &a[i * N];
+
 		for (j = 0; j < N; j++)
-			res[j * N + i] = a[i * N + j];
+			res[j * N + i] = *(pa_line + j);
 	}
 
 	return res;
@@ -132,8 +136,9 @@ double *my_solver(int N, double *A, double *B)
 	bat = matrix_multiplication(B, transpose, N, N_LOWER);
 
 	for (i = 0; i < N; i++) {
+		double *pa_line = &a_2b[i * N];
 		for (j = 0; j < N; j++)
-			bat[i * N + j] += a_2b[i * N + j];
+			bat[i * N + j] += *(pa_line + j);
 	}
 
 	free(a_2);

@@ -19,4 +19,5 @@ solver_neopt:
 solver_opt:
     - asemnatoare cu cazul solver_neopt
     - diferenta fiind renuntarea la accesele vectoriale prin dereferentiere utilizand pointeri
-    - astfel se scad numarul de adunari si inmultiri pentru a calcula adresele matricilor liniarizate din functia de inmultire
+    - astfel se scad numarul de adunari si inmultiri pentru a calcula adresele matricilor liniarizate din functia de inmultire,
+    transpusa si calculul sumei de la final
