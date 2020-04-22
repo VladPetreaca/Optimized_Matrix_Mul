@@ -1,0 +1,22 @@
+-----READMEE-----
+    -----Petreaca Vlad-Florin 336CB----
+
+solver_blas:
+    - pentru a calcula expresia, mi-am mai declarat 2 matrici auxiliare in care am copiat matricile date A si B folosind 
+    dcopy din blas
+    - am calculat pe rand folosind dtrmm : A^2 in a, in B am calculat A^2 * B, in b am calculat B * At
+    - la sfarsit, am adunat matricile rezultate si anume b + B si am intors b
+
+solver_neopt:
+    - pentru acest caz mi-am definit o functie care inmuleste 2 matrici avand 3 cazuri: (SQUARE - Rdiicare la patrat a unei
+    matrici superior triunghiulara) , (U_NORMAL - inmultirea unei matrici superior triunghiulare cu una normala), (N_LOWER -
+    care inmuleste o matrice normala cu una inferior triunghiulara)
+    - pe langa functia de inmultire mi-am mai definit o functie care imi returneaza transpusa unei matrici
+    - la final, imi declar cate o matrice rezultat pentru fiecare operatie de inmultire calculand cei doi termeni ai 
+    adunarii expresiei
+    -adun cei 2 termeni, si anume(bat si a_2b)
+
+solver_opt:
+    - asemnatoare cu cazul solver_neopt
+    - diferenta fiind renuntarea la accesele vectoriale prin dereferentiere utilizand pointeri
+    - astfel se scad numarul de adunari si inmultiri pentru a calcula adresele matricilor liniarizate din functia de inmultire
