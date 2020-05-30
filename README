@@ -1,23 +1,24 @@
 -----READMEE-----
-    -----Petreaca Vlad-Florin 336CB----
+
+The expression is: C = B * A^t + A^2 * B, where
+	- A, B are square matrices of size n*n
+	- A is an upper triangulated matrix
+	- A^t is the transpose of A
+	- A^2 is a square matrix
+
 
 solver_blas:
-    - pentru a calcula expresia, mi-am mai declarat 2 matrici auxiliare in care am copiat matricile date A si B folosind 
-    dcopy din blas
-    - am calculat pe rand folosind dtrmm : A^2 in a, in B am calculat A^2 * B, in b am calculat B * At
-    - la sfarsit, am adunat matricile rezultate si anume b + B si am intors b
+	- to calculate the expression, I declared 2 auxiliary matrices in which I copied the given matrix A and B using DCOPY from BLAS.
+	- I calculated one by one using DTRMM: A^2 in a, A^2 * B in B, B * A^t in b.
+	- finally, I added matrix B to b and returned it.
 
 solver_neopt:
-    - pentru acest caz mi-am definit o functie care inmuleste 2 matrici avand 3 cazuri: (SQUARE - Rdiicare la patrat a unei
-    matrici superior triunghiulara) , (U_NORMAL - inmultirea unei matrici superior triunghiulare cu una normala), (N_LOWER -
-    care inmuleste o matrice normala cu una inferior triunghiulara)
-    - pe langa functia de inmultire mi-am mai definit o functie care imi returneaza transpusa unei matrici
-    - la final, imi declar cate o matrice rezultat pentru fiecare operatie de inmultire calculand cei doi termeni ai 
-    adunarii expresiei
-    -adun cei 2 termeni, si anume(bat si a_2b)
+	- for this case, I defined a function that multiplies 2 matrices by 3 cases: (SQUARE - squaring an upper triangulated matrix), 
+	(U_NORMAL - multiplication of an upper triangulated matrix with a normal one), (N_LOWER - multiplication a normal matrix with a lower triangulated matrix).
+	- in addition to the multiplication function, I also defined another function that returns the transpose of a matrix.
+	- finally, I declare one result matrix for each multiplication calculating the 2 terms of the addition and the sum.
 
 solver_opt:
-    - asemnatoare cu cazul solver_neopt
-    - diferenta fiind renuntarea la accesele vectoriale prin dereferentiere utilizand pointeri
-    - astfel se scad numarul de adunari si inmultiri pentru a calcula adresele matricilor liniarizate din functia de inmultire,
-    transpusa si calculul sumei de la final
+	- similar to the previous case
+	- the difference is the use of pointers to access a specified zone of memory
+	- thus, the number of additions and multiplications of the matrices descreases to calculate the addresses of the linearized matrices
